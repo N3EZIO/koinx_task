@@ -2,7 +2,7 @@ const getBalance = async (transactions, address) => {
     
     let balance = 0;
     for(let i=0; i<transactions.length; i++){
-        const value = transactions[i].value / 1000000000000000000;
+        const value = transactions[i].value / 1000000000000000000; //convert wei to ether
         if(transactions[i].from === address){
             balance -= value;
         }
