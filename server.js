@@ -1,10 +1,9 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const normalTxn = require('./api/normal_txn');
 
-
-
-
+app.use('/api/normal_txn', normalTxn);
 
 
 
