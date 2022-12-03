@@ -23,3 +23,4 @@ mongoose.connect(`${config.dbURI}`, {useNewUrlParser: true, useUnifiedTopology: 
     getEthPrice();
 
 });
+module.exports = app;

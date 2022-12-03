@@ -21,3 +21,20 @@ npm install
 npm start # to start the server on port given
 ```
 
+## Usage
+
+Project deployed at https://n4bci1.deta.dev/
+
+#### Get all transactions
+
+```http
+  GET /api/normal_txn/address
+```
+
+### Get Balance of a User
+```http
+  GET api/get_balance/address
+```
+
+
+
