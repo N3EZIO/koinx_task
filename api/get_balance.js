@@ -1,13 +1,14 @@
 const getBalance = async (transactions, address) => {
-    
+    // convert address to all lowercase
+    address = address.toLowerCase();
     let balance = 0;
     for(let i=0; i<transactions.length; i++){
         const value = transactions[i].value / 1000000000000000000; //convert wei to ether
+        if(transactions[i].to == address){
+            balance += value;
+        }
         if(transactions[i].from === address){
             balance -= value;
-        }
-        if(transactions[i].to === address){
-            balance += value;
         }
     }
 
@@ -31,14 +32,14 @@ Router.get('/:address', async (req, res) => {
         return res.status(400).json({message: 'Invalid address'});
     }
     try{
-        //get transactions from db using address
+        //getting transactions from db using address
         const user = await User.findOne({address: address});
         if(user){
             const transactions = user.transactions;
             const balance = await getBalance(transactions, address);
             res.status(200).json({balance: balance, price: price.price});
         }else{
-            //send a get request to the blockchain api and insert the data into the database
+            //sending a get request to the blockchain api and insert the data into the database
             const response = await axios.get('https://api.etherscan.io/api',{
                 params: {
                     module: 'account',

@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
-const port = 1337;
 const normalTxn = require('./api/normal_txn');
 const mongoose = require('mongoose');
 const config = require('./config');
 const Price = require('./models/price');
 const getBalance = require('./api/get_balance');
 const getEthPrice = require('./getEthPrice');
-
+const cors = require('cors');
+const port = config.PORT;
+app.use(cors());
 app.use(express.json());
 app.use('/api/get_balance', getBalance);
 app.use('/api/normal_txn', normalTxn);
